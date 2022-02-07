@@ -71,3 +71,6 @@ Derived/
 Fixtures/AppWithSwiftPackages/.package.resolved
 Fixtures/AppWithCarthageDependencies/Tuist/Dependencies/
 Fixtures/AppWithSPMDependencies/Tuist/Dependencies/
+Fixtures/AppWithFailingSPMDependencies/Tuist/Dependencies/
+Fixtures/AppWithXCFrameworks/Tuist/Dependencies/
+

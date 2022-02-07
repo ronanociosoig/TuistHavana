@@ -11,7 +11,7 @@ let project = Project(
             infoPlist: .default,
             sources: "Targets/AppWithFailingSPMDependencies/Sources/**",
             dependencies: [
-                .external(name: "FirebaseCrashlytics")
+                .external(name: "FirebaseCrashlytics"),
                 .external(name: "RealmSwift")
             ]
         ),
