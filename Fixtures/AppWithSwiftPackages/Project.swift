@@ -22,7 +22,7 @@ let project = Project(name: "AppWithSwiftPackages",
             product: .app,
             bundleId: "io.tuist.app",
             infoPlist: .default,
-            sources: "**",
+            sources: "Targets/AppWithSwiftPackages/Sources/**",
             dependencies: [
                 .package(product: "Alamofire"),
                 .package(product: "Charts"),
