@@ -3,7 +3,7 @@
 # Tuist.io (Havana) Dependencies Test Fixtures
 This repository was added to support this article about how to improve the build time performance of an iOS application with external dependencies using Tuist.io to load the dependencies and generate the Xcode project, with fixtures providing a range of test cases. 
 
-I selected 9 popular libraries on the basis that both Swift package and Carthage options are available, and that they follow the expected build process. (More about this below.) 
+I selected 9 popular libraries on the basis that both Swift package and Carthage options are available, and that they follow the expected build process. 
 
 - Alamofire
 - Charts
@@ -197,7 +197,7 @@ Running a clean build for the 3 cases of source frameworks, binary frameworks an
 	Files scanned: 1187
 	Source lines of code: 498048
 
-The total build time difference between cached frameworks and sources is massive, and essentially removes almost all the compile effort. I have noticed that increasing the number of frameworks has negligible impace on the overall build times. 
+The total build time difference between cached frameworks and sources is massive, and essentially removes almost all the compile effort. I have noticed that increasing the number of frameworks has negligible impact on the overall build times. 
 	
 ## Failing Fixture
 	
