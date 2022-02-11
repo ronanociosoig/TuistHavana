@@ -17,7 +17,7 @@ I selected 9 popular libraries on the basis that both Swift package and Carthage
 
 Currently there are only 2 ways of loading dependences: Swift Packages and Carthage. CocoaPods are not currently supported although this should be possible in a few months.  
 
-###Swift Packages
+### Swift Packages
 
 For Swift Packages, once they are defined in the `Dependencies.swift` file, fetched, the cache warm command will compile them for the simulator, and then on running focus on the project an Xcode project is generated that has the dependencies linked as binary frameworks, thus massively reducing the clean compile time. 
 
@@ -25,17 +25,17 @@ Next, if the `--xcframeworks` option is added in the `cache warm` command, the d
 
 When `tuist cache warm` is run, the compiled frameworks can be found under `~/.tuist/Cache/BuildCache/<UUID>`. 
 
-###Carthage
+### Carthage
 For Carchage dependencies, they compile straight into XCFrameworks so adding the flag is not necessary. On running `tuist dependencies fetch` this will checkout the code, doload it, and compile it for multiple architectures and build XCFrameworks stored under `Tuist/Dependencies/Carthage/Build`. There is no need to call `cache warm` here.
 
-###Non-Standard Swift Package Dependencies 
+### Non-Standard Swift Package Dependencies 
 
 There were a couple of unexpected behaviours observed with Firebase, Facebook, and the dependencies that they load. Rather than downloading everything as sources, the checkout contains binary XCFrameworks amongst the mix of dependencies. The XCFrameworks can be found under `Tuist/Dependencies/SwiftPackageManager/.build/artifacts` 
 
-###Failing Dependencies
+### Failing Dependencies
 Finally some compile issues were observed with both Firebase Crashlytics and Realm, and they are grouped in a failing fixture: `AppWithFailingSPMDependencies`
 
-##Test Fixtures
+## Test Fixtures
 
 - Application with Swift Packages using the 1.x approach
 - Application with Swift Packages using the 2.x approach
@@ -43,7 +43,7 @@ Finally some compile issues were observed with both Firebase Crashlytics and Rea
 - Application with Swift Packages using the 2.x approach, but load XCFrameworks by default
 - Application with Swift Packages using the 2.x approach but fail to complie
 
-##Build Time Comparisons
+## Build Time Comparisons
 From these fixtures I took the first 3 to generate comparison data. 
 
 I ran 5 clean builds for each of the following cases and took the average: 
@@ -64,9 +64,9 @@ I ran 5 clean builds for each of the following cases and took the average:
 
 The results show that there's a very good case for only using binary frameworks in Xcode projects for all dependencies, but there is very little difference whether Carthage or Swift Packages are used.  
 
-##Fixture Details 
+## Fixture Details 
 
-###Loading Swift Packages Using Tuist 1.x
+### Loading Swift Packages Using Tuist 1.x
 <p align="center">
     <img src="Packages.png"
       width=352>
@@ -74,7 +74,7 @@ The results show that there's a very good case for only using binary frameworks 
 
 Under the 1.x appraoch the packages are defined in the Project.swift manifest and these are loaded in a similar fashion to how Xcode loads Swift Packages. This fixture is here as a comparison for measuring clean build times.
 
-###Loading Swift Packages Using Tuist 2.x
+### Loading Swift Packages Using Tuist 2.x
 <p align="center">
     <img src="SPMDependenciesSourceFrameworks.png"
       width=481>
@@ -88,7 +88,7 @@ Run commands:
 	
 The generated Xcode project links all of the dependencies as source frameworks that need to be compiled and are represented as light yellow icons.
 
-###Loading Swift Packages Using Tuist 2.x + Cache Warm
+### Loading Swift Packages Using Tuist 2.x + Cache Warm
 
 <p align="center">
     <img src="SPMDependenciesBinaryFrameworks.png"
@@ -104,7 +104,7 @@ Run commands:
 	
 The generated Xcode project links all of the dependencies as binary frameworks and are represented as solid yellow icons similar to those provided the OS.
 
-###Loading Swift Packages Using Tuist 2.x + Cache Warm + XCFrameworks
+### Loading Swift Packages Using Tuist 2.x + Cache Warm + XCFrameworks
 
 <p align="center">
     <img src="SPMDependenciesXCFrameworks.png"
@@ -120,7 +120,7 @@ Run commands:
 	
 The generated Xcode project links all of the dependencies as multi-arch XCFrameworks and are represented as solid blue icons.
 
-###Loading Carthage Using Tuist 2.x
+### Loading Carthage Using Tuist 2.x
 
 <p align="center">
     <img src="CarthageDependencies.png"
@@ -135,7 +135,7 @@ When Carthage dependencies are fetched, they are immediately compiled into multi
 
 
 
-###Loading Swift Packages Using Tuist 2.x The Generate XCFrameworks
+### Loading Swift Packages Using Tuist 2.x The Generate XCFrameworks
 
 Most Swift Packages when fetched are linked as source frameworks, but in this fixture I highlight some of the more common exceptions: 
 
@@ -149,7 +149,7 @@ After running dependencies fetch and focus this generates the Xcode project with
       width=512>
 </p>
 
-###Facebook SDK
+### Facebook SDK
 
 After running `tuist dependencies fetch`, there are a number of XCFrameworks found in the path: 
 
@@ -167,14 +167,14 @@ They are:
 
 In this fixture not all of these are defined in the Project.swift as external dependencies so they are not listed. 
 
-###Firebase
+### Firebase
 
 For Firebase, it loads `FirebaseAnalytics.xcframework` as well as the GoogleAppMeasurement frameworks: 
 
 	GoogleAppMeasurement.xcframework
 	GoogleAppMeasurementIdentitySupport.xcframework
 	
-###Compile Time Comparison 
+### Compile Time Comparison 
 Running a clean build for the 3 cases of source frameworks, binary frameworks and multi-arch XCFrameworks for the 2 dependences are as follows:  
 
 	Default:
@@ -199,7 +199,7 @@ Running a clean build for the 3 cases of source frameworks, binary frameworks an
 
 The total build time difference between cached frameworks and sources is massive, and essentially removes almost all the compile effort. I have noticed that increasing the number of frameworks has negligible impace on the overall build times. 
 	
-##Failing Fixture
+## Failing Fixture
 	
 Realm fails to compile with this error: 
 
@@ -216,19 +216,19 @@ Firebase Crashlytivs fails to compile with this and several similar errors:
 </p>
 These are known issues and will be fixed in the near future. 
 
-###Other Known Issues
+### Other Known Issues
 If you run `dependencies fetch` and then modify the `Dependencies.swift` file, you can call `dependencies update`, but it doesn't always work. In those cases call `dependencies clean` and fetch again.
 
-##Appendix
+## Appendix
 
-###Environment
+### Environment
 The test environment was Xcode 13.2.1 running on Mac OS 12.0.1, MacBook Pro, M1 Processor. 16GB RAM.
 
 Tuist version 2.6.0 (Havana)
 
-###Compiler Times
+### Compiler Times
 
 Compile times for sources can be several times larger than the total time for building a project as the compiler takes full advantage of all the cores of the processor to run jobs in parallel. 
 
-###Running Compile Comparisons
+### Running Compile Comparisons
 Clean build folder is selected in Xcode before each time build is selected. Then the build is selected using `Product > Perform Action > Build With Timing Summary`
