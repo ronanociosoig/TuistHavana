@@ -1,7 +1,7 @@
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io) 
 
 # Tuist.io (Havana) Dependencies Test Fixtures
-This repository was added to support this article about how to improve the build time performance of an iOS application with external dependencies using Tuist.io to load the dependencies and generate the Xcode project, with fixtures providing a range of test cases. 
+This repository was added to support this article about how to improve the build time performance of an iOS application with external dependencies using Tuist.io to load the dependencies and generate the Xcode project, with fixtures providing a range of test cases. (The article covers caching of both external depdendencies and a modularised project)
 
 I selected 9 popular libraries on the basis that both Swift package and Carthage options are available, and that they follow the expected build process. 
 
@@ -15,7 +15,7 @@ I selected 9 popular libraries on the basis that both Swift package and Carthage
 - SnapKit
 - ViewAnimator
 
-Currently there are only 2 ways of loading dependences: Swift Packages and Carthage. CocoaPods are not currently supported although this should be possible in a few months.  
+Currently there are only 2 ways of loading dependences: Swift Packages and Carthage. CocoaPods are not currently supported although this should be possible in a few months. Open tickets related to CocoaPods [here](https://github.com/tuist/tuist/issues/3003) and [here](https://github.com/tuist/tuist/issues/3004)
 
 ### Swift Packages
 
@@ -214,7 +214,10 @@ Firebase Crashlytivs fails to compile with this and several similar errors:
     <img src="FirebaseCrashlyticsCompileError.png"
       width=1584>
 </p>
-These are known issues and will be fixed in the near future. 
+
+These are known issues and will be fixed in the near future. The Firebase issue is [here](https://github.com/tuist/tuist/issues/3638) There is a PR [here](https://github.com/tuist/tuist/pull/4031) that, onced merged, should help resolve these issues.
+
+A work-around for these errors is to define the dependencies using the 1.x approach. But also note that although both approaches currently work, the 1.x approach may be removed in a 3.x release. The discussion about it is [here](https://github.com/tuist/tuist/issues/3906) 
 
 ### Other Known Issues
 If you run `dependencies fetch` and then modify the `Dependencies.swift` file, you can call `dependencies update`, but it doesn't always work. In those cases call `dependencies clean` and fetch again.
