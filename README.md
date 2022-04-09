@@ -1,7 +1,7 @@
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io) 
 
 # Tuist.io (Havana) Dependencies Test Fixtures
-This repository was added to support this article about how to improve the build time performance of an iOS application with external dependencies using Tuist.io to load the dependencies and generate the Xcode project, with fixtures providing a range of test cases. (The article covers caching of both external depdendencies and a modularised project)
+This repository was added to support [this article](https://ronanociosoig.medium.com/warming-up-to-havana-accelerate-ios-builds-with-binary-caching-using-tuist-2-x-bd9ea6631a92) about how to improve the build time performance of an iOS application with external dependencies using Tuist.io to load the dependencies and generate the Xcode project, with fixtures providing a range of test cases. (The article covers caching of both external depdendencies and a modularised project)
 
 I selected 9 popular libraries on the basis that both Swift package and Carthage options are available, and that they follow the expected build process. 
 
