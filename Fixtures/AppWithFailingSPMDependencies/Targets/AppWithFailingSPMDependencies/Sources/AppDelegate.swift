@@ -1,6 +1,4 @@
 import UIKit
-import AppWithFailingSPMDependenciesKit
-import AppWithFailingSPMDependenciesUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewController.view.backgroundColor = .white
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
-        AppWithFailingSPMDependenciesKit.hello()
-        AppWithFailingSPMDependenciesUI.hello()
-
         return true
     }
-
 }
